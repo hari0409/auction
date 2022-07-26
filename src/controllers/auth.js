@@ -1,6 +1,6 @@
 exports.login = async (req, res, next) => {
   try {
-    res.status(200).send({ message: "Ok api is working 🚀" });
+    const data=req.body
   } catch (error) {
     next(error);
   }

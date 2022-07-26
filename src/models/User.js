@@ -14,13 +14,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    listed: {
-      type: [mongoose.Schema.Types.ObjectId],
-      default: [],
-    },
     ethAddr: {
       type: String,
       required: true,
+    },
+    listed: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
     },
     bought: {
       type: [mongoose.Schema.Types.ObjectId],
@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema(
     },
     resetToken: {
       type: String,
-      required: true,
+      default: null,
     },
   },
   {
