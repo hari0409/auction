@@ -26,8 +26,8 @@ app.get("/", async (req, res, next) => {
 
 //Main application routes
 app.use("/api/auth", require("./src/routes/auth"));
-app.use("/api/user", require("./src/routes/user"));
 app.use("/api/item", require("./src/routes/item"));
+app.use("/api/user", require("./src/routes/user"));
 
 //Route not found & Error routes
 app.use((req, res, next) => {

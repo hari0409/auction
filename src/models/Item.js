@@ -5,6 +5,10 @@ const ItemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    desc: {
+      type: String,
+      required: true,
+    },
     basePrice: {
       type: Number,
       required: true,
@@ -33,6 +37,15 @@ const ItemSchema = new mongoose.Schema(
     heldBy: {
       type: mongoose.Schema.Types.ObjectId,
       default: null,
+    },
+    minInc: {
+      type: Number,
+      required: true,
+    },
+    categort: {
+      type: [String],
+      default: [],
+      enum: [""],
     },
   },
   {
