@@ -66,10 +66,6 @@ const ItemSchema = new mongoose.Schema(
         "business & international",
       ],
     },
-    transactionId: {
-      type: String,
-      default: "",
-    },
   },
   {
     timestamps: true,

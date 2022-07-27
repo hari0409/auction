@@ -1,5 +1,6 @@
-const { default: mongoose, mongo } = require("mongoose");
+const mongoose = require("mongoose");
 const sendEmail = require("../lib/sendEmail");
+const Bought = require("../models/Bought");
 const Item = require("../models/Item");
 const User = require("../models/User");
 
@@ -42,12 +43,12 @@ exports.placebid = async (req, res, next) => {
     }
     let prevPrice = item.currentPrice;
     if (amount - prevPrice < item.minInc) {
+      console.log(amount, prevPrice, item.minInc);
       return res.status(403).json({
         status: "failure",
         msg: "Less than minimum increment",
       });
     }
-    console.log(item.owner.toString(), user._id.toString());
     if (item.owner.toString() == user._id.toString()) {
       return res.status(403).json({
         status: "failure",
@@ -178,26 +179,115 @@ exports.removeFromWatchlist = async (req, res, next) => {
 exports.getWatchlist = async (req, res, next) => {
   try {
     const { email, pgNo, limit } = req.body;
-    const user = await User.findOne(
+    let user = await User.findOne(
       {
         email,
       },
       {
-        watchlist: 1,
+        watchlist: {
+          $slice: [limit * (pgNo - 1), limit],
+        },
       }
-    )
-      .skip((pgNo - 1) * limit)
-      .limit(limit);
+    );
     if (user) {
+      const list = user.watchlist;
       return res.status(200).json({
         status: "success",
-        user,
+        list,
       });
     }
     return res.status(404).json({
       status: "failure",
       msg: "User doesnt exists",
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.makepayment = async (req, res, next) => {
+  try {
+    const { email, id, transactionid } = req.body;
+    const user = await User.findOne(
+      {
+        email: email,
+      },
+      { _id: 1, heldItems: 1 }
+    );
+    const item = await Item.findById(mongoose.Types.ObjectId(id));
+    if (!item) {
+      return res.status(404).json({
+        status: "failure",
+        msg: "Item not available",
+      });
+    }
+    if (!user) {
+      return res.status(404).json({
+        status: "failure",
+        msg: "User doesnt exists",
+      });
+    }
+    if (!item.status == "live") {
+      return res.status(403).json({
+        status: "failure",
+        msg: "Auction item not live",
+      });
+    }
+    if (user.heldItems) {
+      const index = user.heldItems.indexOf(id);
+      if (index > -1) {
+        const bitem = new Bought({ prodId: item._id, transactionid });
+        await User.findByIdAndUpdate(user._id, {
+          $pull: {
+            heldItems: item._id,
+          },
+          $push: {
+            bought: bitem,
+          },
+        });
+        item.status = "sold";
+        item.boughtBy = user._id;
+        await item.save();
+        res.status(200).json({
+          status: "success",
+          msg: "Payment recorded",
+        });
+      } else {
+        return res.status(401).json({
+          status: "failure",
+          msg: "This object is not held by the user",
+        });
+      }
+    } else {
+      return res.status(401).json({
+        status: "failure",
+        msg: "Nothing in held items",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.heldup = async (req, res, next) => {
+  try {
+    let user = await User.findById(mongoose.Types.ObjectId(req.params.id), {
+      heldItems: {
+        $slice: [req.body.limit * (req.body.pgNo - 1), req.body.limit],
+      },
+    });
+    if (user) {
+      user = user.heldItems;
+      return res.status(200).json({
+        status: "success",
+        user,
+      });
+    } else {
+      return res.status(404).json({
+        status: "failure",
+        msg: "User not found",
+      });
+    }
   } catch (error) {
     next(error);
   }

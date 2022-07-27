@@ -1,4 +1,15 @@
 const mongoose = require("mongoose");
+const BoughtSchema = new mongoose.Schema({
+  prodId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  transactionid: {
+    type: String,
+    required: true,
+  },
+});
+
 const UserSchema = new mongoose.Schema(
   {
     name: {
@@ -23,7 +34,7 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
     bought: {
-      type: [mongoose.Schema.Types.ObjectId],
+      type: [BoughtSchema],
       default: [],
     },
     watchlist: {
@@ -37,14 +48,6 @@ const UserSchema = new mongoose.Schema(
     resetToken: {
       type: String,
       default: null,
-    },
-    verified: {
-      type: mongoose.Schema.Types.Boolean,
-      default: false,
-    },
-    transactions: {
-      type: [String],
-      default: [],
     },
   },
   {

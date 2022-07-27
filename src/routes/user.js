@@ -1,15 +1,13 @@
-const { default: mongoose } = require("mongoose");
 const {
   getuser,
   placebid,
   addToWatchlist,
   removeFromWatchlist,
   getWatchlist,
+  makepayment,
+  heldup,
 } = require("../controllers/user");
-const Item = require("../models/Item");
-const User = require("../models/User");
 const router = require("express").Router();
-const sendEmail = require("../lib/sendEmail");
 
 //Get user data-->HB
 router.get("/getuser/:id", getuser);
@@ -27,5 +25,9 @@ router.post("/removefromwatchlist", removeFromWatchlist);
 router.get("/watchlist", getWatchlist);
 
 //Payment for a auction item-->HB
-router.post("/pay");
+router.post("/pay", makepayment);
+
+//Get heldup items-->HB
+router.post("/heldup/:id", heldup);
+
 module.exports = router;

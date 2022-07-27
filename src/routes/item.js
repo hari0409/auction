@@ -1,8 +1,5 @@
 const router = require("express").Router();
-const { default: mongoose } = require("mongoose");
-const { createitem, getitem, getall, search } = require("../controllers/item");
-const Item = require("../models/Item");
-const User = require("../models/User");
+const { createitem, getitem, reject, live } = require("../controllers/item");
 
 //Create an auction item-->HB
 router.post("/createitem", createitem);
@@ -25,7 +22,10 @@ router.post("/down/:id");
 //Approve the amount & change status to sold for auction item-->RJS
 router.post("/accept/:id");
 
-//Bring auction live-->HB
-router.post("/up/:id");
+//Reject offer & resume-->HB
+router.post("/reject", reject);
+
+//Bring item live again-->HB
+router.post("/live", live);
 
 module.exports = router;

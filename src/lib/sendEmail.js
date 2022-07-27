@@ -23,7 +23,7 @@ const sendEmail = async (emailId, data, subject) => {
     if (error) {
       return console.log(error.message);
     } else {
-      return console.log("Email sent successfully");
+      return;
     }
   });
 };
