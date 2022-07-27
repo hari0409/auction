@@ -4,7 +4,8 @@ const User = require("../models/User");
 
 exports.createitem = async (req, res, next) => {
   try {
-    const { email, name, basePrice, img, minInc } = req.body;
+    const { email, name, basePrice, img, minInc, desc, category, proof } =
+      req.body;
     const user = await User.findOne(
       {
         email: email,
@@ -32,6 +33,10 @@ exports.createitem = async (req, res, next) => {
       img,
       currentPrice: basePrice,
       minInc,
+      owner: user._id,
+      desc,
+      category,
+      proof,
     });
     await item.save();
     user.listed.push(item._id);

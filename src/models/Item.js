@@ -13,6 +13,14 @@ const ItemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    minInc: {
+      type: Number,
+      required: true,
+    },
     currentPrice: {
       type: Number,
       required: true,
@@ -38,14 +46,29 @@ const ItemSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       default: null,
     },
-    minInc: {
-      type: Number,
-      required: true,
-    },
-    categort: {
+    proof: {
       type: [String],
       default: [],
-      enum: [""],
+    },
+    category: {
+      type: [String],
+      default: [],
+      enum: [
+        "collectibles & art",
+        "electronics",
+        "fashion",
+        "home & garden",
+        "auto parts & accessories",
+        "musical instruments & gears",
+        "spoorting goods",
+        "toys & hobbies",
+        "video games & consoles",
+        "business & international",
+      ],
+    },
+    transactionId: {
+      type: String,
+      default: "",
     },
   },
   {

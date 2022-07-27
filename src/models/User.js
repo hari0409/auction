@@ -42,6 +42,10 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.Boolean,
       default: false,
     },
+    transactions: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,

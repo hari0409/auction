@@ -41,6 +41,19 @@ exports.placebid = async (req, res, next) => {
       });
     }
     let prevPrice = item.currentPrice;
+    if (amount - prevPrice < item.minInc) {
+      return res.status(403).json({
+        status: "failure",
+        msg: "Less than minimum increment",
+      });
+    }
+    console.log(item.owner.toString(), user._id.toString());
+    if (item.owner.toString() == user._id.toString()) {
+      return res.status(403).json({
+        status: "failure",
+        msg: "Owner cannot bid for the product",
+      });
+    }
     if (amount > item.basePrice && amount > item.currentPrice) {
       const emailData = `The item ${item.name}'s price have increased from ${prevPrice} to ${item.currentPrice}.`;
       const subject = `Update on ${item.name}`;
@@ -54,7 +67,6 @@ exports.placebid = async (req, res, next) => {
           },
           { new: true }
         );
-        console.log(oldUser);
         sendEmail(oldUser.email, emailData, subject);
       }
       item.currentPrice = amount;
