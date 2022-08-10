@@ -163,3 +163,68 @@ exports.live = async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.getDown = async (req, res, next) => {
+//   try {
+//     const { email,id } = req.body;
+//     const user = await User.findOne({
+//       email: email
+//     }, {
+//       listed: 1
+//     });
+//     if (!user) {
+//       return res.status(404).json({
+//         status: "failure",
+//         msg: "user not found"
+//       })
+//     }
+//     if (!user.listed.includes(id)) {
+//       res.status(400).json({
+//         status: "failure",
+//         msg: "user not the owner of the item"
+//       })
+//     }
+//     // const item = await Item.findOne(mongoose.Types.ObjectId(id));
+//     const item = await Item.findById(mongoose.Types.ObjectId(id));
+//     console.log(item);
+//     if (item.status == "live") {
+//       item.status = "down";
+//       await item.save();
+//       res.status(200).json({
+//         status: "success",
+//         msg: "data updated"
+//       })
+//     }
+//     return res.status(400).json({ status: "failure", msg: "item is not live" })
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
+exports.getDown = async (req, res, next) => {
+  try {
+    const { email, id } = req.body;
+    const user = await User.findOne({ email: email }, {
+      listed: 1
+    });
+
+    if (!user) {
+      res.status(404).json({ status: "failure", msg: "user not found" })
+    }
+    if (!user.listed.includes(id)) {
+      res.status(404).json({
+        status: "failure",
+        msg: "user not owner of item"
+      })
+
+      const item = await Item.findById(mongoose.Types.ObjectId(id));
+      if (item.status == "live") {
+        item.status = "down";
+        await save();
+      }
+      return res.status(400).json({ status: "failure", msg: "item is not live" })
+    }
+  } catch (error) {
+    next(error);
+  }
+}

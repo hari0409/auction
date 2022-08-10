@@ -5,8 +5,8 @@ const {
   verify,
   requestreset,
   confirm,
+  updatePw,
 } = require("../controllers/auth");
-const bcryptjs = require("bcryptjs");
 const User = require("../models/User");
 const { decrypt } = require("../lib/tokenizer");
 const sendEmail = require("../lib/sendEmail");
@@ -28,7 +28,7 @@ router.post("/requestreset", requestreset);
 router.post("/confirm", confirm);
 
 //Update password alone-->RJS
-router.post("/updatepassword");
+router.post("/updatepassword", updatePw);
 
 //Update user data-->RJS
 router.put("/update/:id");
