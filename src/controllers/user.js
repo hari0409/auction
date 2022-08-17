@@ -292,3 +292,17 @@ exports.heldup = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.updateUser = async(req, res, next)=>{
+  try {
+    const {id}=req.params;
+    const body = req.body;
+    const user = await User.findByIdAndUpdate(id, body, { new: true })
+    res.status(200).json({
+      status: "success",
+      user
+    })
+  } catch (error) {
+    next(error);
+  }
+}

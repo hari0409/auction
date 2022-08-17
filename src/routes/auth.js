@@ -30,7 +30,5 @@ router.post("/confirm", confirm);
 //Update password alone-->RJS
 router.post("/updatepassword", updatePw);
 
-//Update user data-->RJS
-router.put("/update/:id");
 
 module.exports = router;

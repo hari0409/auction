@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { createitem, getitem, reject, live, getDown } = require("../controllers/item");
+const { createitem, getitem, reject, live, getDown, acceptBid, updateItem } = require("../controllers/item");
 
 //Create an auction item-->HB
 router.post("/createitem", createitem);
@@ -14,13 +14,13 @@ router.get("/getall");
 router.get("/search/:val");
 
 //Update item data-->RJS
-router.put("/getitem/:id");
+router.put("/updateitem/:id", updateItem);
 
 //Bring down the auctioned item-->RJS
 router.post("/down", getDown);
 
 //Approve the amount & change status to sold for auction item-->RJS
-router.post("/accept/:id");
+router.post("/accept/:id", acceptBid);
 
 //Reject offer & resume-->HB
 router.post("/reject", reject);

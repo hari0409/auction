@@ -6,6 +6,7 @@ const {
   getWatchlist,
   makepayment,
   heldup,
+  updateUser,
 } = require("../controllers/user");
 const router = require("express").Router();
 
@@ -29,5 +30,8 @@ router.post("/pay", makepayment);
 
 //Get heldup items-->HB
 router.post("/heldup/:id", heldup);
+
+//Update user data-->RJS
+router.put("/update/:id",updateUser);
 
 module.exports = router;

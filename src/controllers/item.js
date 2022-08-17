@@ -2,6 +2,7 @@ const { default: mongoose } = require("mongoose");
 const Item = require("../models/Item");
 const User = require("../models/User");
 const sendEamil = require("../lib/sendEmail");
+const sendEmail = require("../lib/sendEmail");
 
 exports.createitem = async (req, res, next) => {
   try {
@@ -164,43 +165,6 @@ exports.live = async (req, res, next) => {
   }
 };
 
-// exports.getDown = async (req, res, next) => {
-//   try {
-//     const { email,id } = req.body;
-//     const user = await User.findOne({
-//       email: email
-//     }, {
-//       listed: 1
-//     });
-//     if (!user) {
-//       return res.status(404).json({
-//         status: "failure",
-//         msg: "user not found"
-//       })
-//     }
-//     if (!user.listed.includes(id)) {
-//       res.status(400).json({
-//         status: "failure",
-//         msg: "user not the owner of the item"
-//       })
-//     }
-//     // const item = await Item.findOne(mongoose.Types.ObjectId(id));
-//     const item = await Item.findById(mongoose.Types.ObjectId(id));
-//     console.log(item);
-//     if (item.status == "live") {
-//       item.status = "down";
-//       await item.save();
-//       res.status(200).json({
-//         status: "success",
-//         msg: "data updated"
-//       })
-//     }
-//     return res.status(400).json({ status: "failure", msg: "item is not live" })
-//   } catch (error) {
-//     next(error);
-//   }
-// }
-
 exports.getDown = async (req, res, next) => {
   try {
     const { email, id } = req.body;
@@ -224,6 +188,46 @@ exports.getDown = async (req, res, next) => {
       }
       return res.status(400).json({ status: "failure", msg: "item is not live" })
     }
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.acceptBid = async (req, res, next) => {
+  try {
+    const { uid } = req.body;
+    const { id } = req.params;
+    const user = await User.findById(uid, { email: 1 })
+    const item = await Item.findById(id, {
+      owner: 1, heldBy: 1, status: 1, name: 1
+    });
+    if (!uid == item.owner) {
+      return res.status(400).json({
+        status: "failure",
+        msg: "You are not the owner"
+      })
+    }
+    item.status = "sold";
+    sendEmail(user.email, `Your offer for ${item.name} has been accepted by the owner.Pay the due ASAP`, `Offer accepted for ${item.name}`);
+    await item.save();
+    res.status(200).json({
+      status: "success",
+      msg: "Item status updated."
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.updateItem = async( req, res, next) => {
+  try {
+    const {id} = req.params;
+    const body = req.body;
+    const item = await Item.findByIdAndUpdate(id, body, {new:true})
+    res.status(200).json({
+      status:"success",
+      item
+    }) 
   } catch (error) {
     next(error);
   }
