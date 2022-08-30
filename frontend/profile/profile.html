@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+    <nav>
+        <a href="" style="float: left;">
+            <img class="logo" src="../img/logo.jpg" alt="logo" height="70" width="70">
+        </a>
+        <form role="search" id="form">
+            <input type="search" id="query" name="q" placeholder="Search..." aria-label="Search through site content">
+            <button>
+                <svg viewBox="0 0 1024 1024">
+                    <path class="path1"
+                        d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+                    </path>
+                </svg>
+            </button>
+        </form>
+
+        <div class="navbar">
+            <button href="">Profile</button>
+            <button href="">About</button>
+            <button href="">Home</button>
+        </div>
+    </nav>
+ 
+    <div class="content">
+    <div class="container" style="margin-left:20px" width=30>
+        <img src="../img/logo.jpg" alt="user" style="border-radius: 50%;margin-top: 4.5px;
+        margin-left: 4px; margin-right: 10px;"
+        height="150"
+        width="150">
+       <h2 style="font-family:sans-serif; margin-left: 20px; ">Name</h2>
+       <h5 style="font-family:sans-serif ;margin-left: 20px; opacity: 0.75;">user name</h5>
+      </div>
+      <div class="tab-buttons">
+            <button class="tablinks" onclick="userTabs(event, 'inAuction')">In auction</button>
+            <button class="tablinks" onclick="userTabs(event, 'history')">History</button>
+            <button class="tablinks"onclick="userTabs(event, 'addItem')" >Add item</button>
+          </div>
+          
+           <div class="content-menu">
+          <div id="inAuction" class="tabcontent">
+            <h3>inAuction</h3>
+            <p>inAuction </p>
+          </div>
+          
+          <div id="history" class="tabcontent" style="display:none">
+            <h3>History</h3>
+            <p>History is the capital of France.</p>
+          </div>
+          
+          <div id="addItem" class="tabcontent" style="display:none">
+            <h3>Add Item</h3>
+            <p>Add Item </p>
+          </div>
+        </div>
+
+    
+    <div>
+  
+         
+       
+    </div> 
+  
+    <script>
+        function userTabs(evt, action) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(action).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        </script> 
+    
+      </body>
+
+</html>
