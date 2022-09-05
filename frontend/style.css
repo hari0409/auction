@@ -80,7 +80,7 @@ form {
     margin-left: 150px;
 }
 
-input {
+nav input {
     all: unset;
     font: 16px system-ui;
     color: white;
