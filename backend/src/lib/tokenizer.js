@@ -11,6 +11,7 @@ exports.encrypt = (email) => {
 };
 
 exports.decrypt = (email) => {
+  console.log(email);
   let iv = Buffer.from(email.iv, "hex");
   let encryptedText = Buffer.from(email.encryptedData, "hex");
   let decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(key), iv);

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { createitem, getitem, reject, live, getDown, acceptBid, updateItem } = require("../controllers/item");
+const { createitem, getitem, reject, live, getDown, acceptBid, updateItem, getByCat, findprod } = require("../controllers/item");
 
 //Create an auction item-->HB
 router.post("/createitem", createitem);
@@ -8,10 +8,10 @@ router.post("/createitem", createitem);
 router.get("/getitem/:id", getitem);
 
 //Get all items based on category for recommendation-->RJS
-router.get("/getall");
+router.get("/getall",getByCat);
 
 //Get item based on search value-->RJS
-router.get("/search/:val");
+router.get("/search/:search_txt",findprod);
 
 //Update item data-->RJS
 router.put("/updateitem/:id", updateItem);

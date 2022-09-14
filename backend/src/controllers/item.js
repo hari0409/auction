@@ -219,16 +219,91 @@ exports.acceptBid = async (req, res, next) => {
   }
 }
 
-exports.updateItem = async( req, res, next) => {
+exports.updateItem = async (req, res, next) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const body = req.body;
-    const item = await Item.findByIdAndUpdate(id, body, {new:true})
+    const item = await Item.findByIdAndUpdate(id, body, { new: true })
     res.status(200).json({
-      status:"success",
+      status: "success",
       item
-    }) 
+    })
   } catch (error) {
     next(error);
   }
 }
+exports.getByCat = async (req, res, next) => {
+  try {
+    const cats = [
+      "collectibles & art",
+      "electronics",
+      "fashion",
+      "home & garden",
+      "auto parts & accessories",
+      "musical instruments & gears",
+      "spoorting goods",
+      "toys & hobbies",
+      "video games & consoles",
+      "business & international",
+    ];
+    const data = await Item.find({
+      category: {
+        $in: cats
+      }
+    }, {
+      name: 1,
+      basePrice: 1,
+      currentPrice: 1,
+      owner: 1,
+      img: 1
+    }).sort({
+      createdAt: -1
+    }).limit(50);
+    let count = data.length;
+    res.status(200).json({
+      status: "success",
+      data,
+      count
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.findprod = async (req, res, next) => {
+  try {
+    const { search_txt } = req.params;
+    console.log(search_txt);
+    const prods = await Item.find({
+      $text: {
+        $search: search_txt
+      }
+    })
+    res.status(200).json({
+      status: "success",
+      prods
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+// exports.getByCat = async(req,res,next)=>{
+//   try {
+//     const cats = [
+//       "collectibles & art",
+//       "fashion",
+//       "home & garden",
+//       "auto parts & accessories",
+//       "musical instruments & gears",
+//       "spoorting goods",
+//       "toys & hobbies",
+//       "video games & consoles",
+//       "business & international",
+//       "electronics",
+//     ];
+//   } catch (error) {
+//     next(error);
+//   }
+// }
