@@ -3,12 +3,15 @@
 <head>    
     <title>Login Form</title>    
     <link rel="stylesheet" type="text/css" href="forgpass.css">    
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+
 </head>    
 <body>    
     <h2>Don't worry we'll help you 
         set up a new password. </h2><br>    
     <div class="login">    
-    <form id="login" method="get" action="login.php">    
+    <form id="login" method="post" >    
         <label><b>Enter your Email     
         </b>    
         </label>    
@@ -16,7 +19,20 @@
         <br><br>    
         </label>    
         <br><br>    
-        <input type="button" name="log" id="log" value="send verification email">       
+        <input type="button" name="log" id="log" value="send verification email" onclick="sendEmail()"/> 
+        <script>
+            const sendEmail = () => {
+     axios.post('https://auction-backend-testing.herokuapp.com/api/auth/requestreset',{
+        email:"krishks1234@gmail.com"
+     })
+    .then(
+        alert("email sent")
+    )
+ .catch(error => console.error(error));
+};
+        
+
+        </script>      
            
     </form>     
 </div>    
