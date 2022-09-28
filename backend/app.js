@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const colors = require("colors");
 const connectDb = require("./src/lib/db");
 const helmet = require("helmet");
+const cors=require("cors");
 require("dotenv").config();
 
 //Connection Function
@@ -14,6 +15,7 @@ const conn = connectDb();
 const app = express();
 
 //Adding required configs
+app.use(cors())
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

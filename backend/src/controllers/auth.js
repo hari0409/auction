@@ -17,7 +17,6 @@ exports.login = async (req, res, next) => {
       });
     }
     const status = await bcryptjs.compare(password, user.password);
-    console.log(status);
     if (!status) {
       return res.status(401).json({
         status: "failure",
