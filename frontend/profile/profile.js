@@ -1,8 +1,17 @@
-const verify=async()=>{
-    var user_data=localStorage.getItem("user_data");
-    user_data=JSON.parse(user_data);
-    console.log(user_data);
-    if (!user_data){
-        window.location.href=`http://localhost:5500/frontend/login/login.html`;
-    }
-}
+const verify = async () => {
+  var user_data = localStorage.getItem("user_data");
+  user_data = JSON.parse(user_data);
+  console.log(user_data);
+  if (!user_data) {
+    window.location.href = `http://localhost:5500/frontend/login/login.html`;
+  }
+};
+
+const logout = async () => {
+  try {
+    localStorage.removeItem("user_data");
+    location.href = `http://localhost:5500/frontend/login/login.html`;
+  } catch (error) {
+    console.log(error);
+  }
+};

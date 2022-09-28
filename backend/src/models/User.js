@@ -27,7 +27,6 @@ const UserSchema = new mongoose.Schema(
     },
     ethAddr: {
       type: String,
-      required: true,
     },
     listed: {
       type: [mongoose.Schema.Types.ObjectId],
