@@ -18,10 +18,6 @@ const login = async () => {
   });
   var user_data = await Promise.resolve(res.json());
   if (res.status == 200) {
-    user_data = {
-      email: user_data.user.email,
-      id: user_data.user._id,
-    };
     user_data = JSON.stringify(user_data);
     localStorage.setItem("user_data", user_data);
     window.location.href = `http://localhost:5500/frontend/profile/profile.html`;

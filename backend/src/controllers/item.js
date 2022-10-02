@@ -168,70 +168,82 @@ exports.live = async (req, res, next) => {
 exports.getDown = async (req, res, next) => {
   try {
     const { email, id } = req.body;
-    const user = await User.findOne({ email: email }, {
-      listed: 1
-    });
+    const user = await User.findOne(
+      { email: email },
+      {
+        listed: 1,
+      }
+    );
 
     if (!user) {
-      res.status(404).json({ status: "failure", msg: "user not found" })
+      res.status(404).json({ status: "failure", msg: "user not found" });
     }
     if (!user.listed.includes(id)) {
       res.status(404).json({
         status: "failure",
-        msg: "user not owner of item"
-      })
+        msg: "user not owner of item",
+      });
 
       const item = await Item.findById(mongoose.Types.ObjectId(id));
       if (item.status == "live") {
         item.status = "down";
         await save();
       }
-      return res.status(400).json({ status: "failure", msg: "item is not live" })
+      return res
+        .status(400)
+        .json({ status: "failure", msg: "item is not live" });
     }
   } catch (error) {
     next(error);
   }
-}
+};
 
 exports.acceptBid = async (req, res, next) => {
   try {
     const { uid } = req.body;
     const { id } = req.params;
-    const user = await User.findById(uid, { email: 1 })
+    const user = await User.findById(uid, { email: 1 });
     const item = await Item.findById(id, {
-      owner: 1, heldBy: 1, status: 1, name: 1
+      owner: 1,
+      heldBy: 1,
+      status: 1,
+      name: 1,
     });
     if (!uid == item.owner) {
       return res.status(400).json({
         status: "failure",
-        msg: "You are not the owner"
-      })
+        msg: "You are not the owner",
+      });
     }
     item.status = "sold";
-    sendEmail(user.email, `Your offer for ${item.name} has been accepted by the owner.Pay the due ASAP`, `Offer accepted for ${item.name}`);
+    sendEmail(
+      user.email,
+      `Your offer for ${item.name} has been accepted by the owner.Pay the due ASAP`,
+      `Offer accepted for ${item.name}`
+    );
     await item.save();
     res.status(200).json({
       status: "success",
-      msg: "Item status updated."
-    })
+      msg: "Item status updated.",
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 
 exports.updateItem = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const item = await Item.findByIdAndUpdate(id, body, { new: true })
+    const item = await Item.findByIdAndUpdate(id, body, { new: true });
     res.status(200).json({
       status: "success",
-      item
-    })
+      item,
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 exports.getByCat = async (req, res, next) => {
   try {
     const cats = [
@@ -246,48 +258,51 @@ exports.getByCat = async (req, res, next) => {
       "video games & consoles",
       "business & international",
     ];
-    const data = await Item.find({
-      category: {
-        $in: cats
+    const data = await Item.find(
+      {
+        category: {
+          $in: cats,
+        },
+      },
+      {
+        name: 1,
+        basePrice: 1,
+        currentPrice: 1,
+        owner: 1,
+        img: 1,
       }
-    }, {
-      name: 1,
-      basePrice: 1,
-      currentPrice: 1,
-      owner: 1,
-      img: 1
-    }).sort({
-      createdAt: -1
-    }).limit(50);
+    )
+      .sort({
+        createdAt: -1,
+      })
+      .limit(50);
     let count = data.length;
     res.status(200).json({
       status: "success",
       data,
-      count
-    })
+      count,
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 
 exports.findprod = async (req, res, next) => {
   try {
     const { search_txt } = req.params;
     console.log(search_txt);
-    const prods = await Item.find({
-      $text: {
-        $search: search_txt
-      }
-    })
+    const prods = await Item.find(
+      { $text: { $search: search_txt } },
+      { score: { $meta: "textScore" } }
+    ).sort({ score: { $meta: "textScore" } });
     res.status(200).json({
       status: "success",
-      prods
-    })
+      prods,
+    });
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 // exports.getByCat = async(req,res,next)=>{
 //   try {

@@ -7,8 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="../style.css" />
+    <script src="history.js"></script>
   </head>
-  <body>
+  <body onload="fetchHistory()">
     <nav>
       <a href="" style="float: left">
         <img
@@ -46,41 +47,7 @@
     <center>
       <h2 class="title">Order History</h2>
     </center>
-    <div class="product_grid">
-      <div class="product">
-        <img
-          src="../img/img1.jpg"
-          alt=""
-          width="200px"
-          height="200px"
-          class="prod_img"
-        />
-        <div class="data">
-          <h2 class="prod_title">Title</h2>
-          <p class="bp">Bought price</p>
-          <p class="owner">Owner</p>
-          <a href="#">
-            <button class="view_more">View More</button>
-          </a>
-        </div>
-      </div>
-      <div class="product">
-        <img
-          src="../img/img1.jpg"
-          alt=""
-          width="200px"
-          height="200px"
-          class="prod_img"
-        />
-        <div class="data">
-          <h2 class="prod_title">Title</h2>
-          <p class="bp">Bought price</p>
-          <p class="owner">Owner</p>
-          <a href="#">
-            <button class="view_more">View More</button>
-          </a>
-        </div>
-      </div>
+    <div class="product_grid" id="product_grid">
     </div>
   </body>
 </html>

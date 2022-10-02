@@ -1,15 +1,18 @@
 const mongoose = require("mongoose");
 const ItemSchema = new mongoose.Schema(
   {
-    name: { //Req
+    name: {
+      //Req
       type: String,
       required: true,
     },
-    desc: {//Req
+    desc: {
+      //Req
       type: String,
       required: true,
     },
-    basePrice: {//Req
+    basePrice: {
+      //Req
       type: Number,
       required: true,
     },
@@ -17,7 +20,8 @@ const ItemSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    minInc: {//Req
+    minInc: {
+      //Req
       type: Number,
       required: true,
     },
@@ -25,7 +29,8 @@ const ItemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    img: {//Req
+    img: {
+      //Req
       type: [String],
       default: [],
     },
@@ -46,11 +51,13 @@ const ItemSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       default: null,
     },
-    proof: {//Req
+    proof: {
+      //Req
       type: [String],
       default: [],
     },
-    category: {//Req
+    category: {
+      //Req
       type: [String],
       default: [],
       enum: [
