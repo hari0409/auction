@@ -6,12 +6,3 @@ const verify = async () => {
     window.location.href = `http://localhost:5500/frontend/login/login.html`;
   }
 };
-
-const logout = async () => {
-  try {
-    localStorage.removeItem("user_data");
-    location.href = `http://localhost:5500/frontend/login/login.html`;
-  } catch (error) {
-    console.log(error);
-  }
-};
