@@ -17,6 +17,7 @@ const app = express();
 //Adding required configs
 app.use(cors())
 app.use(helmet());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 if (process.env.NODE_ENV == "development") app.use(morgan("dev"));

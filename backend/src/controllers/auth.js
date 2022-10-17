@@ -112,7 +112,7 @@ exports.requestreset = async (req, res, next) => {
     }
     const token = crypto.randomBytes(32).toString("hex");
     user.resetToken = token;
-    const url = `${process.env.FRONTEND_URL}/reset?token=${token}`;
+    const url = `${process.env.FRONTEND_URL}reset?token=${token}`;
     console.log(url);
     sendEmail(
       user.email,

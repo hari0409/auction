@@ -2,6 +2,8 @@ let url = `http://localhost:3000`;
 const login = async () => {
   const username = document.getElementById("Uname").value;
   const password = document.getElementById("Pass").value;
+
+
   console.log(username, password);
   const data = {
     email: username,
