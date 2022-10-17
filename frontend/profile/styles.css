@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    color: white;
 }
 
 
@@ -9,9 +10,11 @@
     float: left;
     margin-left: 4px;
 }
-nav img:hover{
+
+nav img:hover {
     transform: scale(1.1);
 }
+
 nav {
     list-style-type: none;
     margin: 0;
@@ -30,8 +33,6 @@ nav button {
     padding: 14px 16px;
     text-decoration: none;
     float: right;
-    border-radius: ;
-
 }
 
 .navbar button {
@@ -102,7 +103,7 @@ form button {
     cursor: pointer;
     width: 44px;
     height: 44px;
-    
+
 }
 
 svg {
@@ -112,25 +113,27 @@ svg {
     height: 24px;
     padding: 10px;
 }
-form:focus-within,form:hover{
+
+form:focus-within,
+form:hover {
     transform: scale(1.1);
 }
 
 /* main content */
 
 
-.content{
-    display:grid;
-    grid-template-columns: 15% 80% 
- 
-   
+.content {
+    display: grid;
+    grid-template-columns: 15% 80%;
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkElxpaAqLxpKQ7-2ncmerZlI_sM6wmuh3lQ&usqp=CAU");
 }
-.tab-buttons{
+
+.tab-buttons {
     margin-top: 2em;
 }
 
 .tablinks {
-    float:right;
+    float: right;
     border: none;
     outline: none;
     cursor: pointer;
@@ -138,12 +141,12 @@ form:focus-within,form:hover{
     font-size: 17px;
     width: 25%;
     margin-left: 10px;
-  
-} 
-
-.content-menu{
-   position:absolute;
-   margin-top: 6em;
-   margin-left: 50%;
+    background-color: white;
+    color: black;
 }
 
+.content-menu {
+    position: absolute;
+    margin-top: 6em;
+    margin-left: 50%;
+}
