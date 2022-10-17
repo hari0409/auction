@@ -13,6 +13,15 @@ const create = async () => {
     console.log("executing create");
     var pass = document.getElementById("Pass").value;
     var cpass = document.getElementById("CPass").value;
+
+    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    let regextest = regex.test(pass);
+    if(regextest==false){
+       alert('Password must be of length 6-20, contain atleast one uppercase, one lowercase, one number and one special character');
+       return false;
+    }
+      
+
     if (pass != cpass) {
       alert("Password not matching");
       return false;
