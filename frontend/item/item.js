@@ -1,6 +1,11 @@
 let url = `http://localhost:3000`;
+let main_item;
 
 const getitem = async () => {
+  var user = localStorage.getItem("user_data");
+  user = JSON.parse(user);
+  user = user.user;
+  user.user;
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
@@ -23,6 +28,7 @@ const getitem = async () => {
     return;
   } else {
     item = item.item;
+    main_item = item;
     var name_center = document.createElement("center");
     var name_h1 = document.createElement("h1");
     name_h1.innerHTML = item.name;
@@ -67,6 +73,11 @@ const getitem = async () => {
     bought_by.innerHTML = `Bought By:  <span class="span_content">${item.boughtBy}</span>`;
     var doc_p = document.createElement("p");
     doc_p.innerHTML = "Important Documents";
+    if (item.owner != user._id) {
+      var bid_dev = document.createElement("div");
+      bid_dev.innerHTML = `<input type="text" class="bid_amt" id="bid_amt" />
+      <button onclick="bid()">Bid Amount</button>`;
+    }
     cp_div.appendChild(bp);
     cp_div.appendChild(cp);
     content_div.appendChild(cp_div);
@@ -91,7 +102,42 @@ const getitem = async () => {
       doc_ul.appendChild(doc_li);
     });
     desc_div.appendChild(doc_ul);
+    desc_div.appendChild(bid_dev);
     product_div.appendChild(desc_div);
     document.body.appendChild(product_div);
+  }
+};
+
+const bid = async () => {
+  var user = localStorage.getItem("user_data");
+  user = JSON.parse(user);
+  user = user.user;
+  var value = document.getElementById("bid_amt");
+  if (value.value.length > 0) {
+    var val = value.value;
+    bid_data = {
+      email: user.email,
+      id: main_item._id,
+      amount: Number(val),
+    };
+    var res = await fetch(`${url}/api/user/placebid`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bid_data),
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    });
+    res = await Promise.resolve(res.json());
+    console.log(res);
+    if (res.status == "success") {
+      alert("Bid success");
+      location.reload();
+    } else {
+      alert(res.msg);
+    }
+  } else {
+    alert("Amount cannot be null");
   }
 };

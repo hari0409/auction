@@ -17,7 +17,6 @@ const fetchHistory = async () => {
     });
     item = await Promise.resolve(item.json());
     item = item.item;
-    console.log(item.img[0]);
     //Main Product div;
     var product = document.createElement("div");
     product.className = "product";

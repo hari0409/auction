@@ -27,9 +27,8 @@ const loadnav = async () => {
         <button href="">Add item</button>
       </a>
     </div>
-  `
-  }
-  else {
+  `;
+  } else {
     ele.innerHTML = `
     <a href="/frontend" style="float: left">
       <img class="logo" src="../img/logo.jpg" alt="logo" height="70" width="70" />
@@ -55,10 +54,9 @@ const loadnav = async () => {
         <button href="">About</button>
       </a>
     </div>
-  `
+  `;
   }
-
-}
+};
 
 const logout = async () => {
   try {
@@ -71,8 +69,9 @@ const logout = async () => {
 
 const search = async () => {
   var search_query = document.getElementById("query").value;
-  location.href = `http://localhost:5500/frontend/result/result.html?search_query=${search_query}`;
-}
+  (location.href.replace = `http://localhost:5500/frontend/result/result.html?search_query=${search_query}`),
+    true;
+};
 
 const verify = async () => {
   var user_data = localStorage.getItem("user_data");
@@ -81,5 +80,3 @@ const verify = async () => {
   }
   return;
 };
-
-
