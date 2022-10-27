@@ -4,7 +4,6 @@ const fetchHistory = async () => {
   var user = localStorage.getItem("user_data");
   user = JSON.parse(user);
   var orderHistory = user.user.bought;
-  console.log(orderHistory);
   var product_container = document.getElementById("product_grid");
   orderHistory.map(async (e) => {
     var item = await fetch(`${url}/api/item/getitem/${e.prodId}`, {

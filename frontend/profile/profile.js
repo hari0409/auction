@@ -43,7 +43,6 @@ const verify = async () => {
     var all_item = document.getElementById("all_item_auction");
     var item = document.createElement("div");
     item.className = "item";
-    console.log(itemo.status);
     if (itemo.status == "live") {
       item.innerHTML = `<h4>${itemo?.name}</h4><p>Current Price: ${itemo?.currentPrice}</p><a href="/frontend/item/item.html?item_id=${itemo?._id}">
       <button>View Item</button>
@@ -84,7 +83,6 @@ const verify = async () => {
     `;
     all_item.appendChild(item);
   });
-  console.log(user_data);
 };
 
 const logout = async () => {
@@ -92,7 +90,7 @@ const logout = async () => {
     localStorage.removeItem("user_data");
     location.href = `http://localhost:5500/frontend/login/login.html`;
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
 

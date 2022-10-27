@@ -39,6 +39,6 @@ const add = async () => {
       alert(user_data.msg);
     }
   } catch (error) {
-    console.log(error);
+    alert(error)
   }
 };

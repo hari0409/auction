@@ -63,3 +63,7 @@ body {
   flex-direction: row-reverse;
   /* background-color: red; */
 }
+
+.search_text {
+  margin: 20px;
+}

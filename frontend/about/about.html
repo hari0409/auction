@@ -1,56 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style3.css">
-</head>
-<body>
-    <nav>
-        <a href="" style="float: left;">
-            <img class="logo" src="../img/logo.jpg" alt="logo" height="70" width="70">
-        </a>
-        <form role="search" id="form">
-            <input type="search" id="query" name="q" placeholder="Search..." aria-label="Search through site content">
-            <button>
-                <svg viewBox="0 0 1024 1024">
-                    <path class="path1"
-                        d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
-                    </path>
-                </svg>
-            </button>
-        </form>
-        
-        <div class="navbar">
-           <a href="../login/login.html">
-               <button >Login</button>
-           </a>
-         <a href="../signup/signup.html">
-           <button href="">Sign up</button>
-         </a>
-         <a href="about.html">
-           <button href="">About</button>
-         </a>
-        </div>
-    </nav>
-     
+    <link rel="stylesheet" href="style3.css" />
+    <script src="../nav.js"></script>
+  </head>
+  <body onload="loadnav();verify_nav()">
+    <nav id="nav_inject"></nav>
     <div class="all">
-        <h1>About Us</h1>
-    <div class="text">
-        <p><b>An auction is a sales event wherein potential buyers place competitive bids on assets or services either in an open or closed format. Auctions are popular because buyers and sellers believe they will get a good deal buying or selling assets.</b></p>
-    </div>
-    <div >
+      <h1>About Us</h1>
+      <div class="text">
+        <p>
+          <b
+            >An auction is a sales event wherein potential buyers place
+            competitive bids on assets or services either in an open or closed
+            format. Auctions are popular because buyers and sellers believe they
+            will get a good deal buying or selling assets.</b
+          >
+        </p>
+      </div>
+      <div>
         <span class="cont"><b>Contact:</b> 983418273</span>
-        <span class="cont1"><b>  e-mail:</b> auction123@gmail.com</span>
-    </div>
-    <div class="feed">
+        <span class="cont1"><b> e-mail:</b> auction123@gmail.com</span>
+      </div>
+      <div class="feed">
         <span class="fb"><b>Feedback:</b></span>
+      </div>
+      <div class="box">
+        <textarea rows="5" cols="25" style="resize: none"> </textarea>
+      </div>
+      <button class="bt" type="submit">submit</button>
     </div>
-    <div class="box"><textarea rows="5" cols="25" style="resize:none" > </textarea></div>
-    <button class="bt" type="submit">submit</button>
-    </div>
-    
-</body>
+  </body>
 </html>

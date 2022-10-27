@@ -14,7 +14,6 @@ const find = async () => {
     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
   });
   items = await Promise.resolve(items.json());
-  console.log(items);
   items = items.prods;
   var main_cotnainer = document.getElementById("product_grid");
   items.map((e) => {
@@ -33,10 +32,12 @@ const find = async () => {
     <a href="/frontend/item/item.html?item_id=${e?._id}">
     <button>View</button>
     </a>
+    </div>
         </div>
         </div>
-        </div>
-      `;
+        `;
     main_cotnainer.appendChild(item_container);
   });
+  var stext = document.getElementById("search_text");
+  stext.innerHTML = `Searching for "${value.toUpperCase()}"`;
 };

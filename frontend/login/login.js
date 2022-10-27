@@ -4,7 +4,6 @@ const login = async () => {
   const password = document.getElementById("Pass").value;
 
 
-  console.log(username, password);
   const data = {
     email: username,
     password: password,

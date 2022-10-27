@@ -10,17 +10,17 @@ const verify = async () => {
 
 const create = async () => {
   try {
-    console.log("executing create");
     var pass = document.getElementById("Pass").value;
     var cpass = document.getElementById("CPass").value;
 
     var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     let regextest = regex.test(pass);
-    if(regextest==false){
-       alert('Password must be of length 6-20, contain atleast one uppercase, one lowercase, one number and one special character');
-       return false;
+    if (regextest == false) {
+      alert(
+        "Password must be of length 6-20, contain atleast one uppercase, one lowercase, one number and one special character"
+      );
+      return false;
     }
-      
 
     if (pass != cpass) {
       alert("Password not matching");
@@ -41,11 +41,10 @@ const create = async () => {
       body: JSON.stringify(userObject), // body data type must match "Content-Type" header
     });
     var user_data = await Promise.resolve(res.json());
-    console.log(user_data);
     if (user_data.status == "failure") {
       alert(user_data.msg);
     }
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
