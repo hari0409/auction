@@ -1,7 +1,5 @@
 let url = `http://localhost:3000`;
 
-<<<<<<< Updated upstream
-=======
 let img_link;
 
 const upload = async (e) => {
@@ -35,7 +33,6 @@ const upload = async (e) => {
   }
 };
 
->>>>>>> Stashed changes
 const add = async () => {
   try {
     var name = document.getElementById("name").value;

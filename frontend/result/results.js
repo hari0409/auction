@@ -20,15 +20,6 @@ const find = async () => {
   items.map((e) => {
     var item_container = document.createElement("div");
     item_container.innerHTML = `
-<<<<<<< Updated upstream
-      <div class="product">
-      <img src="${e.img[0]}" alt="" width="140px" height="140px" />
-      <div class="rest_data">
-        <h3 class="title">${e.name}</h3>
-        <div class="prices">
-          <h3 class="cp">Current Price: $${e.currentPrice}</h3>
-          <p class="bp">Base Price: $${e.basePrice}</p>
-=======
     <div class="product">
     <img src="${e.img[0]}" alt="" width="140px" height="140px" />
     <div class="rest_data">
@@ -43,7 +34,6 @@ const find = async () => {
     <button class="view-btn">View</button>
     </a>
     </div>
->>>>>>> Stashed changes
         </div>
         <div class="status" id="status">
           <p>${e.status}</p>

@@ -8,17 +8,6 @@ const verify = async () => {
   if (!user_data) {
     window.location.href = `http://localhost:5500/frontend/login/login.html`;
   }
-<<<<<<< Updated upstream
-};
-
-const logout = async () => {
-  try {
-    localStorage.removeItem("user_data");
-    location.href = `http://localhost:5500/frontend/login/login.html`;
-  } catch (error) {
-    console.log(error);
-  }
-=======
   listed.map(async (e) => {
     var item = await fetch(`${url}/api/item/getitem/${e}`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -79,7 +68,6 @@ const logout = async () => {
     `;
     all_item.appendChild(item);
   });
->>>>>>> Stashed changes
 };
 
 function name() {
