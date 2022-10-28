@@ -9,10 +9,6 @@
   margin-left: 4px;
 }
 
-nav img:hover {
-  transform: scale(1.1);
-}
-
 nav {
   list-style-type: none;
   margin: 0;
@@ -61,7 +57,6 @@ nav button:active {
   background-color: initial;
   background-position: 0 0;
   color: white;
-  transform: scale(1.1);
 }
 
 form {
@@ -201,6 +196,4 @@ nav input {
   border: none;
   outline: none;
   background-color: black;
-}
-.search:hover {
 }

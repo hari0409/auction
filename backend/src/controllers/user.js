@@ -93,7 +93,6 @@ exports.placebid = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -207,14 +206,14 @@ exports.getWatchlist = async (req, res, next) => {
 
 exports.makepayment = async (req, res, next) => {
   try {
-    const { email, id, transactionid } = req.body;
-    const user = await User.findOne(
-      {
-        email: email,
-      },
-      { _id: 1, heldItems: 1 }
-    );
+    const { uid, id, transactionid } = req.body;
+    console.log(req.body);
+    const user = await User.findById(mongoose.Types.ObjectId(uid), {
+      _id: 1,
+      heldItems: 1,
+    });
     const item = await Item.findById(mongoose.Types.ObjectId(id));
+    console.log(item);
     if (!item) {
       return res.status(404).json({
         status: "failure",
@@ -293,16 +292,16 @@ exports.heldup = async (req, res, next) => {
   }
 };
 
-exports.updateUser = async(req, res, next)=>{
+exports.updateUser = async (req, res, next) => {
   try {
-    const {id}=req.params;
+    const { id } = req.params;
     const body = req.body;
-    const user = await User.findByIdAndUpdate(id, body, { new: true })
+    const user = await User.findByIdAndUpdate(id, body, { new: true });
     res.status(200).json({
       status: "success",
-      user
-    })
+      user,
+    });
   } catch (error) {
     next(error);
   }
-}
+};

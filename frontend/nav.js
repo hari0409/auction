@@ -3,7 +3,7 @@ async function loadnav() {
   var stat = localStorage.getItem("user_data");
   if (stat) {
     ele.innerHTML = `
-    <a href="/frontend" style="float: left">
+    <a href="/frontend/home/index.html" style="float: left">
       <img class="logo" src="../img/logo.jpg" alt="logo" height="70" width="70" />
     </a>
     <form id="form" onsubmit="return false">
@@ -24,7 +24,7 @@ async function loadnav() {
   `;
   } else {
     ele.innerHTML = `
-    <a href="/frontend" style="float: left">
+    <a href="/frontend/home/index.html" style="float: left">
       <img class="logo" src="../img/logo.jpg" alt="logo" height="70" width="70" />
     </a>
     <form id="form" onsubmit="return false">
@@ -62,4 +62,13 @@ const verify_nav = async () => {
     location.href = `http://localhost:5500/frontend/login/login.html`;
   }
   return;
+};
+
+const logout = async () => {
+  try {
+    localStorage.removeItem("user_data");
+    location.href = `http://localhost:5500/frontend/login/login.html`;
+  } catch (error) {
+    alert(error);
+  }
 };

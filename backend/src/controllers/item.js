@@ -210,6 +210,18 @@ exports.acceptBid = async (req, res, next) => {
       status: 1,
       name: 1,
     });
+    if (!user) {
+      return res.status(404).json({
+        status: "failure",
+        msg: "User not found",
+      });
+    }
+    if (!item) {
+      return res.status(404).json({
+        status: "failure",
+        msg: "Item not found",
+      });
+    }
     if (!uid == item.owner) {
       return res.status(400).json({
         status: "failure",
@@ -226,6 +238,7 @@ exports.acceptBid = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       msg: "Item status updated.",
+      heldBy:item.heldBy,
     });
   } catch (error) {
     next(error);
@@ -245,6 +258,7 @@ exports.updateItem = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.getByCat = async (req, res, next) => {
   try {
     const cats = [

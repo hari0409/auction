@@ -1,15 +1,40 @@
 let url = `http://localhost:3000`;
 
+let img_link;
+
+const upload = async (e) => {
+  try {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Client-ID 4c058197db82eae");
+    var formdata = new FormData();
+    formdata.append("image", e.target.files[0]);
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+    var res = await fetch(
+      "https://api.imgur.com/3/image",
+      requestOptions
+    ).catch((error) => alert(error));
+    res = res.json();
+    res = await Promise.resolve(res);
+    img_link = res.data.link;
+  } catch (error) {
+    alert(error);
+  }
+};
+
 const add = async () => {
   try {
     var name = document.getElementById("name").value;
     var desc = document.getElementById("desc").value;
     var baseprice = document.getElementById("baseprice").value;
     var minInc = document.getElementById("minInc").value;
-    var image = document.getElementById("img").value;
-    var prf = document.getElementById("proof").value;
-    var img = [image];
-    var proof = [prf];
+    var img = [img_link];
+    var proof = [];
+    var proof = [];
     let user = localStorage.getItem("user_data");
     user = JSON.parse(user);
     const data = {
@@ -20,7 +45,7 @@ const add = async () => {
       minInc: Number(minInc),
       desc: desc,
       category: ["collectibles & art", "electronics"],
-      proof: proof,  //img and proof are in array format
+      proof: proof, //img and proof are in array format
     };
     const res = await fetch(`${url}/api/item/createitem`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -33,12 +58,12 @@ const add = async () => {
     });
     var user_data = await Promise.resolve(res.json());
     if (res.status == 200) {
-      user_data = JSON.stringify(user_data);
-      localStorage.setItem("user_data", user_data);
+      alert("Item added Successfully");
+      location.href = "http://localhost:5500/frontend/profile/profile.html";
     } else {
       alert(user_data.msg);
     }
   } catch (error) {
-    alert(error)
+    alert(error);
   }
 };

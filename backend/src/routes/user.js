@@ -32,6 +32,6 @@ router.post("/pay", makepayment);
 router.post("/heldup/:id", heldup);
 
 //Update user data-->RJS
-router.put("/update/:id",updateUser);
+router.put("/update/:id", updateUser);
 
 module.exports = router;

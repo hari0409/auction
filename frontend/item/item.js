@@ -72,8 +72,7 @@ const getitem = async () => {
     var bought_by = document.createElement("p");
     bought_by.innerHTML = `Bought By:  <span class="span_content">${item.boughtBy}</span>`;
     var doc_p = document.createElement("p");
-    doc_p.innerHTML = "Important Documents";
-    if (item.owner != user._id) {
+    if (item.owner != user._id && item.status != "sold") {
       var bid_dev = document.createElement("div");
       bid_dev.innerHTML = `<input type="text" class="bid_amt" id="bid_amt" />
       <button onclick="bid()">Bid Amount</button>`;
@@ -90,19 +89,9 @@ const getitem = async () => {
     desc_div.appendChild(hr);
     desc_div.appendChild(content_div);
     desc_div.appendChild(doc_p);
-    var doc_ul = document.createElement("ul");
-    var docs = item.proof;
-    doc_ul.className = "doc_list";
-    docs.map((e) => {
-      var doc_li = document.createElement("li");
-      var doc_link = document.createElement("a");
-      doc_link.href = e;
-      doc_link.innerHTML = "Required Docs";
-      doc_li.appendChild(doc_link);
-      doc_ul.appendChild(doc_li);
-    });
-    desc_div.appendChild(doc_ul);
-    desc_div.appendChild(bid_dev);
+    if (item.owner != user._id && item.status != "sold") {
+      desc_div.appendChild(bid_dev);
+    }
     product_div.appendChild(desc_div);
     document.body.appendChild(product_div);
   }

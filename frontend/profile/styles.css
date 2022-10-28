@@ -8,9 +8,6 @@
   float: left;
   margin-left: 4px;
 }
-nav img:hover {
-  transform: scale(1.1);
-}
 nav {
   list-style-type: none;
   margin: 0;
@@ -58,7 +55,6 @@ nav button:active {
   background-color: initial;
   background-position: 0 0;
   color: white;
-  transform: scale(1.1);
 }
 
 form {
@@ -93,18 +89,6 @@ form button {
   cursor: pointer;
   width: 44px;
   height: 44px;
-}
-
-svg {
-  color: #fff;
-  fill: currentColor;
-  width: 24px;
-  height: 24px;
-  padding: 10px;
-}
-form:focus-within,
-form:hover {
-  transform: scale(1.1);
 }
 
 /* main content */
@@ -182,4 +166,10 @@ form:hover {
   display: flex;
   gap: 10px;
   padding: 10px;
+}
+.search {
+  color: white;
+  border: none;
+  outline: none;
+  background-color: black;
 }

@@ -22,8 +22,7 @@ exports.login = async (req, res, next) => {
         status: "failure",
         msg: "Incorrect password or email",
       });
-    }
-    else if (status) {
+    } else if (status) {
       return res.status(200).json({
         status: "success",
         user,
@@ -159,22 +158,22 @@ exports.confirm = async (req, res, next) => {
 exports.updatePw = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email: email });
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
     if (!user) {
       return res.status(400).json({
         status: "failure",
-        msg: "user not found"
-      })
+        msg: "user not found",
+      });
     }
     user.password = hashedPassword;
     await user.save();
     res.status(200).json({
       status: "success",
-      msg: "Password succesfully updated"
-    })
+      msg: "Password succesfully updated",
+    });
   } catch (error) {
     next(error);
   }
-}
+};

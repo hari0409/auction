@@ -21,14 +21,32 @@ const accept = async () => {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     });
     res = await Promise.resolve(res.json());
-    if (res.status="success")
-    {
-      alert("Offer accepted");
-    }
-    else{
+    if ((res.status = "success")) {
+      var transactionid = "23456789";
+      var resp = await fetch(`${url}/api/user/pay`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid:res.heldBy,
+          id:pid,
+          transactionid,
+        }),
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      });
+      resp = await Promise.resolve(resp.json());
+      console.log(resp);
+      if (resp.status == "success") {
+        alert("Offer accepted");
+        location.href = "/frontend/profile/profile.html";
+      }
+    } else {
       alert("Error on accepting the offer");
+      // location.href = "/frontend/profile/profile.html";
     }
   } else {
-    location.href = "/frontend/profile/profile.html";
+    // location.href = "/frontend/profile/profile.html";
   }
 };
