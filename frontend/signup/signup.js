@@ -44,7 +44,9 @@ const create = async () => {
     console.log(user_data);
     if (user_data.status == "failure") {
       alert(user_data.msg);
+      return
     }
+    location.href = "http://localhost:5500/frontend/login/login.html"
   } catch (error) {
     console.log(error);
   }

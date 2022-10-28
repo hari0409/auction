@@ -1,5 +1,41 @@
 let url = `http://localhost:3000`;
 
+<<<<<<< Updated upstream
+=======
+let img_link;
+
+const upload = async (e) => {
+  try {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Client-ID 4c058197db82eae");
+    var formdata = new FormData();
+    formdata.append("image", e.target.files[0]);
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+    var res = await fetch(
+      "https://api.imgur.com/3/image",
+      requestOptions
+    ).catch((error) => alert(error));
+    res = res.json();
+    res = await Promise.resolve(res);
+    if (res.status == 200) {
+      img_link = res.data.link;
+      alert(`Image Uploaded Successfully ${img_link}`);
+    }
+    else {
+      alert(res.data.error);
+      alert("Image Upload Failed");
+    }
+  } catch (error) {
+    alert(error);
+  }
+};
+
+>>>>>>> Stashed changes
 const add = async () => {
   try {
     var name = document.getElementById("name").value;

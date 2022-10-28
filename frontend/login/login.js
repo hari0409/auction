@@ -2,9 +2,12 @@ let url = `http://localhost:3000`;
 const login = async () => {
   const username = document.getElementById("Uname").value;
   const password = document.getElementById("Pass").value;
+<<<<<<< Updated upstream
 
 
   console.log(username, password);
+=======
+>>>>>>> Stashed changes
   const data = {
     email: username,
     password: password,
@@ -19,6 +22,8 @@ const login = async () => {
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
   var user_data = await Promise.resolve(res.json());
+  user_data["time"] = Date.now();
+  console.log(user_data);
   if (res.status == 200) {
     user_data = JSON.stringify(user_data);
     localStorage.setItem("user_data", user_data);
@@ -32,6 +37,11 @@ const verify = async () => {
   var user_data = localStorage.getItem("user_data");
   if (user_data) {
     user_data = JSON.parse(user_data);
+    var time = Date.now();
+    if (time - user_data.time > 3600000) {
+      localStorage.removeItem("user_data");
+      location.href = `http://localhost:5500/frontend/login/login.html`;
+    }
     window.location.href = `http://localhost:5500/frontend/profile/profile.html`;
   }
 };
