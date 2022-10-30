@@ -207,13 +207,11 @@ exports.getWatchlist = async (req, res, next) => {
 exports.makepayment = async (req, res, next) => {
   try {
     const { uid, id, transactionid } = req.body;
-    console.log(req.body);
     const user = await User.findById(mongoose.Types.ObjectId(uid), {
       _id: 1,
       heldItems: 1,
     });
     const item = await Item.findById(mongoose.Types.ObjectId(id));
-    console.log(item);
     if (!item) {
       return res.status(404).json({
         status: "failure",
@@ -247,6 +245,8 @@ exports.makepayment = async (req, res, next) => {
         item.status = "sold";
         item.boughtBy = user._id;
         await item.save();
+        console.log(user);
+        sendEmail(user.email, "Bought the item", "Bought the item", true);
         res.status(200).json({
           status: "success",
           msg: "Payment recorded",
@@ -304,4 +304,9 @@ exports.updateUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+exports.email = async (req, res, next) => {
+  sendEmail("hari626007@gmail.com", "Hello", "Hello", true);
+  res.status(200).json({ sent: true });
 };

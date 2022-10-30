@@ -7,6 +7,7 @@ const {
   makepayment,
   heldup,
   updateUser,
+  email,
 } = require("../controllers/user");
 const router = require("express").Router();
 
@@ -33,5 +34,7 @@ router.post("/heldup/:id", heldup);
 
 //Update user data-->RJS
 router.put("/update/:id", updateUser);
+
+router.get("/email", email);
 
 module.exports = router;

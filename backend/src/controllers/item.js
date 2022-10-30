@@ -238,7 +238,7 @@ exports.acceptBid = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       msg: "Item status updated.",
-      heldBy:item.heldBy,
+      heldBy: item.heldBy,
     });
   } catch (error) {
     next(error);

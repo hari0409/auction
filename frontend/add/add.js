@@ -1,32 +1,24 @@
 let url = `http://localhost:3000`;
 
-let img_link;
-
 const upload = async (e) => {
   try {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Client-ID 4c058197db82eae");
-    var formdata = new FormData();
-    formdata.append("image", e.target.files[0]);
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
+    var files = e.target.files[0];
+    var formData = new FormData();
+    formData.append("file", files);
+    formData.append("upload_preset", "c5pd1eoj");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = async function () {
+      let res = JSON.parse(this.responseText);
+      await add(res.secure_url);
     };
-    var res = await fetch(
-      "https://api.imgur.com/3/image",
-      requestOptions
-    ).catch((error) => alert(error));
-    res = res.json();
-    res = await Promise.resolve(res);
-    img_link = res.data.link;
+    xhr.open("post", "https://api.cloudinary.com/v1_1/deyo5qknm/image/upload");
+    xhr.send(formData);
   } catch (error) {
     alert(error);
   }
 };
 
-const add = async () => {
+const add = async (img_link) => {
   try {
     var name = document.getElementById("name").value;
     var desc = document.getElementById("desc").value;
